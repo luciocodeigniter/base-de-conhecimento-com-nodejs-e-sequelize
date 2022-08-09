@@ -1,0 +1,105 @@
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.12.1/datatables.min.css" />
+
+<div class="row">
+
+
+    <div class="col-md-12 mb-4">
+        <a href="/knowledge/new" class="btn btn-sm btn-success">+ Novo</a>
+    </div>
+
+    {{#unless knowledgeCollection}}
+
+    <div class="col-md-12">
+
+        <div class="alert alert-info">
+            Não há Conhecimentos cadastrados
+        </div>
+    </div>
+
+    {{else}}
+
+
+    <div class="col-md-12">
+        <table class="table" id="dataTable">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Título</th>
+                    <th scope="col">Descrição</th>
+                    <th scope="col">Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each knowledgeCollection}}
+                <tr>
+                    <th scope="row">{{this.id}}</th>
+                    <td>{{this.title}}</td>
+                    <td>{{this.description}}</td>
+                    <td>
+                        <a href="/knowledge/edit/{{this.id}}" class="btn btn-sm btn-primary">Editar</a>
+
+
+                        <!-- Button trigger modal -->
+                        <button type="button" class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                            data-bs-target="#staticBackdrop-{{this.id}}">
+                            Excluir
+                        </button>
+                    </td>
+
+                </tr>
+
+
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop-{{this.id}}" data-bs-backdrop="static"
+                    data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="staticBackdropLabel">Confirmação de exclusão</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+
+                                Tem certeza da exclusão do Conhecimento <strong>{{this.title}}</strong>?
+
+                                <p class="text-danger">Essa ação não poderá ser revertida</p>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary"
+                                    data-bs-dismiss="modal">Cancelar</button>
+
+                                <form action="/knowledge/delete/{{this.id}}?_method=DELETE" method="post">
+
+                                    <button type="submit" class="btn btn-danger">Excluir</button>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                {{/each}}
+
+            </tbody>
+        </table>
+    </div>
+
+
+    {{/unless}}
+
+
+
+</div>
+
+
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs5/jq-3.6.0/dt-1.12.1/datatables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#dataTable').DataTable();
+    });
+</script>

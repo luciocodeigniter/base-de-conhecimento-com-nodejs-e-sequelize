@@ -1,0 +1,30 @@
+<div class="row">
+
+    <form action="/knowledge/update/{{knowledge.id}}?_method=PUT" method="post">
+
+
+        <div class="col-md-4 mb-3">
+
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" name="title" value="{{knowledge.title}}" id="floatingInput"
+                    placeholder="Título do conhecimento">
+                <label for="floatingInput">Título do conhecimento</label>
+            </div>
+
+        </div>
+
+        <div class="col-md-4 mb-3">
+
+            <div class="form-floating mb-3">
+                <textarea class="form-control" name="description" id="floatingInput" style="min-height: 200px" placeholder="Descrição">{{knowledge.description}}</textarea>
+                <label for="floatingInput">Descrição do conhecimento</label>
+            </div>
+
+        </div>
+
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+
+    </form>
+
+</div>
